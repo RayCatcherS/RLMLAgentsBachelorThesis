@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1724288188",
+        "python_version": "3.10.1 (tags/v3.10.1:2cd268a, Dec  6 2021, 19:10:37) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\roman\\Documents\\GitHub\\RLMLAgentsBachelorThesis\\UnityProjectRL\\venv\\Scripts\\mlagents-learn --torch-device cuda:0",
+        "mlagents_version": "1.0.0",
+        "mlagents_envs_version": "1.0.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.4.0+cu118",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1724288200"
+    },
+    "total": 11.770261499972548,
+    "count": 1,
+    "self": 0.0033363999100401998,
+    "children": {
+        "run_training.setup": {
+            "total": 0.08591740002157167,
+            "count": 1,
+            "self": 0.08591740002157167
+        },
+        "TrainerController.start_learning": {
+            "total": 11.681007700040936,
+            "count": 1,
+            "self": 0.0004236000240780413,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 11.680573799996637,
+                    "count": 1,
+                    "self": 11.680573799996637
+                },
+                "trainer_threads": {
+                    "total": 2.400018274784088e-06,
+                    "count": 1,
+                    "self": 2.400018274784088e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 7.90000194683671e-06,
+                    "count": 1,
+                    "self": 7.90000194683671e-06
+                }
+            }
+        }
+    }
+}
