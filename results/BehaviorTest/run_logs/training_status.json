@@ -1,4 +1,47 @@
 {
+    "my_environment_parameter": {
+        "lesson_num": 3
+    },
+    "BehaviorTest": {
+        "checkpoints": [
+            {
+                "steps": 499978,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499978.onnx",
+                "reward": 9.689587784806887,
+                "creation_time": 1732465155.2420974,
+                "auxillary_file_paths": [
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499978.pt"
+                ]
+            },
+            {
+                "steps": 999948,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999948.onnx",
+                "reward": 9.278964634977676,
+                "creation_time": 1732465741.4737275,
+                "auxillary_file_paths": [
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999948.pt"
+                ]
+            },
+            {
+                "steps": 1000012,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.onnx",
+                "reward": 9.278964634977676,
+                "creation_time": 1732465741.5534964,
+                "auxillary_file_paths": [
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000012,
+            "file_path": "results\\BehaviorTest\\BehaviorTest.onnx",
+            "reward": 9.278964634977676,
+            "creation_time": 1732465741.5534964,
+            "auxillary_file_paths": [
+                "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.pt"
+            ]
+        }
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "1.1.0",

@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.AI.Navigation;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,10 +12,6 @@ using UnityEngine.AI;
 
 public class TestAgentScript : Agent
 {
-
-    // file addestramento
-    string yamlFilePath = "config/configTankAgent.yaml";
-    string behaviorName = "BehaviorTest";
 
     [SerializeField] private EnvironmentController gameEnvironmentController;
     
@@ -32,62 +29,54 @@ public class TestAgentScript : Agent
     private float distanceReward = 0;
 
 
-
-    private float environmentMapSize = 24f;
-
-
     // curriculum learning 
     private int maxStepHyperparameter = 0;
-    private int trainEpisodeStep = -1;
 
     public void Start() {
 
-        // inizializza il curriculum learning
-        maxStepHyperparameter = YamlConfigLoader.GetMaxSteps(yamlFilePath, behaviorName);
-        List<float> percentages = new List<float> { 0.1f, 0.2f, 0.3f, 0.4f };
-        CurriculumLearning.InitCurriculumLearining(
-            percentages,
-            maxStepHyperparameter
-        );
     }
 
-    
-    
+
+    private BehaviorType behaviorType;
 
     public override void OnEpisodeBegin() {
 
-        // incrementa episodio
-        if(trainEpisodeStep == -1) {
-            trainEpisodeStep = 0;
-        } else {
-            trainEpisodeStep = trainEpisodeStep + 1;
+        // carica environment in base al behaviour type
+        int academySteps = Academy.Instance.StepCount;
+        behaviorType = GetComponent<BehaviorParameters>().BehaviorType;
+        
+        switch(behaviorType) {
+            case BehaviorType.InferenceOnly:
+                gameEnvironmentController.LoadEnvironment(
+                    3
+                );
+            break;
+
+            case BehaviorType.HeuristicOnly:
+                gameEnvironmentController.LoadEnvironment(
+                    3
+                );
+            break;
+
+            case BehaviorType.Default:
+                // carica l'ambiente in base al curriculum learning
+                gameEnvironmentController.LoadEnvironment(
+                    (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0)
+                );
+            break;
         }
 
-        // carica l'ambiente in base al curriculum learning
-        gameEnvironmentController.LoadEnvironment(
-            CurriculumLearning.EnvironmentToLoad(trainEpisodeStep)
-                   );
-
-
-
+       
 
 
         distanceReward = 0;
         //Posizione iniziale dell'agente(casuale)
-        transform.localPosition = new Vector3(
-            Random.Range(-environmentMapSize, environmentMapSize),
-            0,
-            Random.Range(-environmentMapSize, environmentMapSize)
-            );
+        transform.position = gameEnvironmentController.GetRandPosSampleFromActualEnv() + new Vector3(0, 0.5f, 0);
         // rotazione casuale agente
         transform.localRotation = Quaternion.Euler(0f, Random.Range(0, 360), 0f);
 
         //Posizione iniziale dell goal(casuale)
-        objectiveTransform.localPosition = new Vector3(
-            Random.Range(-environmentMapSize, environmentMapSize),
-            0,
-            Random.Range(-environmentMapSize, environmentMapSize)
-            );
+        objectiveTransform.position = gameEnvironmentController.GetRandPosSampleFromActualEnv() + new Vector3(0, 0.5f, 0); ;
         // rotazione casuale goal
         objectiveTransform.localRotation = Quaternion.Euler(0f, Random.Range(0, 360), 0f);
 

@@ -48,7 +48,7 @@ public class Environment : MonoBehaviour {
     /// <summary>
     /// Disegna il marker e l'area della sfera nell'Editor.
     /// </summary>
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         // Disegna la sfera verde che rappresenta l'area
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         Gizmos.DrawSphere(navMeshSurface1.gameObject.transform.position, areaRadius);
@@ -58,9 +58,5 @@ public class Environment : MonoBehaviour {
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(markerPosition.Value, 0.5f); // Marker di raggio 0.5
         }
-    }
-
-    void Start() {
-        ShowRandomPoint(); // Mostra un punto casuale al momento dell'avvio
     }
 }

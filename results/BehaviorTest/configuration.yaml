@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 15000000
+    max_steps: 1000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -77,7 +77,61 @@ engine_settings:
   capture_frame_rate: 60
   no_graphics: false
   no_graphics_monitor: false
-environment_parameters: null
+environment_parameters:
+  my_environment_parameter:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9578
+          value: 0
+      name: lesson0
+      completion_criteria:
+        behavior: BehaviorTest
+        measure: progress
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.2
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9579
+          value: 1
+      name: lesson1
+      completion_criteria:
+        behavior: BehaviorTest
+        measure: progress
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.4
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9580
+          value: 2
+      name: lesson2
+      completion_criteria:
+        behavior: BehaviorTest
+        measure: progress
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9581
+          value: 3
+      name: lesson3
+      completion_criteria:
+        behavior: BehaviorTest
+        measure: progress
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.8
+        require_reset: false
 checkpoint_settings:
   run_id: BehaviorTest
   initialize_from: null

@@ -1,6 +1,7 @@
 behaviors:
   BehaviorTest:
     trainer_type: ppo
+    max_steps: 1000000  # Step massimi per l'addestramento
     hyperparameters:
       batch_size: 1024
       buffer_size: 20480
@@ -25,6 +26,37 @@ behaviors:
         encoding_size: 128
         learning_rate: 0.0003
     keep_checkpoints: 5
-    max_steps: 15000000
     time_horizon: 64
     summary_freq: 60000
+environment_parameters:
+  my_environment_parameter:
+    curriculum:
+      # Prima lezione (iniziale)
+      - name: lesson0
+        completion_criteria:
+          measure: progress
+          behavior: BehaviorTest
+          threshold: 0.20  # Cambia lezione al 10% del training 
+        value: 0
+      # Seconda lezione
+      - name: lesson1
+        completion_criteria:
+          measure: progress
+          behavior: BehaviorTest
+          threshold: 0.40  # Cambia lezione al 30% del training 
+        value: 1
+      # Terza lezione
+      - name: lesson2
+        completion_criteria:
+          measure: progress
+          behavior: BehaviorTest
+          threshold: 0.55  # Cambia lezione al 50% del training 
+        value: 2
+      # Quarta lezione
+      - name: lesson3
+        completion_criteria:
+          measure: progress
+          behavior: BehaviorTest
+          threshold: 0.70  # Cambia lezione al 70% del training 
+        value: 3
+  
