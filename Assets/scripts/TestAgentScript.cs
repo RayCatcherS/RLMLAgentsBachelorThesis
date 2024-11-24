@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.AI.Navigation;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class TestAgentScript : Agent
 {
+
+    // file addestramento
+    string yamlFilePath = "config/configTankAgent.yaml";
+    string behaviorName = "BehaviorTest";
+
+    [SerializeField] private EnvironmentController gameEnvironmentController;
+    
+
     [SerializeField] private Transform objectiveTransform;
     [SerializeField] private float agentMoveSpeed;
     [SerializeField] private float agentRotationSpeed;
@@ -18,20 +30,74 @@ public class TestAgentScript : Agent
     [SerializeField] private Renderer floorRenderer;
 
     private float distanceReward = 0;
+
+
+
+    private float environmentMapSize = 24f;
+
+
+    // curriculum learning 
+    private int maxStepHyperparameter = 0;
+    private int trainEpisodeStep = -1;
+
+    public void Start() {
+
+        // inizializza il curriculum learning
+        maxStepHyperparameter = YamlConfigLoader.GetMaxSteps(yamlFilePath, behaviorName);
+        List<float> percentages = new List<float> { 0.1f, 0.2f, 0.3f, 0.4f };
+        CurriculumLearning.InitCurriculumLearining(
+            percentages,
+            maxStepHyperparameter
+        );
+    }
+
+    
+    
+
     public override void OnEpisodeBegin() {
+
+        // incrementa episodio
+        if(trainEpisodeStep == -1) {
+            trainEpisodeStep = 0;
+        } else {
+            trainEpisodeStep = trainEpisodeStep + 1;
+        }
+
+        // carica l'ambiente in base al curriculum learning
+        gameEnvironmentController.LoadEnvironment(
+            CurriculumLearning.EnvironmentToLoad(trainEpisodeStep)
+                   );
+
+
+
+
+
         distanceReward = 0;
         //Posizione iniziale dell'agente(casuale)
         transform.localPosition = new Vector3(
-            Random.Range(-24f, 24f),
+            Random.Range(-environmentMapSize, environmentMapSize),
             0,
-            Random.Range(-24f, 24f)
+            Random.Range(-environmentMapSize, environmentMapSize)
             );
+        // rotazione casuale agente
+        transform.localRotation = Quaternion.Euler(0f, Random.Range(0, 360), 0f);
+
         //Posizione iniziale dell goal(casuale)
         objectiveTransform.localPosition = new Vector3(
-            Random.Range(-24f, 24f),
+            Random.Range(-environmentMapSize, environmentMapSize),
             0,
-            Random.Range(-24f, 24f)
+            Random.Range(-environmentMapSize, environmentMapSize)
             );
+        // rotazione casuale goal
+        objectiveTransform.localRotation = Quaternion.Euler(0f, Random.Range(0, 360), 0f);
+
+
+        // azzera la velocità dell'agente
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+
     }
 
     public override void CollectObservations(VectorSensor sensor) {
@@ -41,8 +107,26 @@ public class TestAgentScript : Agent
 
     public override void OnActionReceived(ActionBuffers actions) {
         // Ottieni gli input
-        float rotate = actions.ContinuousActions[0]; // Rotazione
-        float moveY = actions.ContinuousActions[1]; // Movimento avanti/indietro
+        int moveYRaw = actions.DiscreteActions[1]; // Movimento avanti/indietro
+        int moveY = 0;
+        int rotateRaw = actions.DiscreteActions[0]; // Rotazione
+        int rotate = 0;
+
+        if(rotateRaw == 0) {
+            rotate = 0;
+        } else if(rotateRaw == 1) {
+            rotate = 1;
+        } else if(rotateRaw == 2) {
+            rotate = -1;
+        }
+
+        if(moveYRaw == 0) {
+            moveY = 0;
+        } else if(moveYRaw == 1) {
+            moveY = 1;
+        } else if(moveYRaw == 2) {
+            moveY = -1;
+        }
 
         // Calcola la direzione del movimento e della rotazione
         Vector3 dirToGo = transform.forward * moveY;
@@ -61,7 +145,7 @@ public class TestAgentScript : Agent
         rb.AddForce(dirToGo * agentMoveSpeed, ForceMode.VelocityChange);
 
 
-        float timePenalty = -1f / MaxStep;
+        float timePenalty = -4f / MaxStep;
         AddReward(timePenalty);
 
 
@@ -79,10 +163,23 @@ public class TestAgentScript : Agent
 
     // Funzione per testare il movimento dell'agente, sovrascrivendo le azioni del modello con quelle genrate da un input(tastiera)
     public override void Heuristic(in ActionBuffers actionsOut) {
-        ActionSegment<float> continousActions = actionsOut.ContinuousActions;
+        ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
         
-        continousActions[0] = Input.GetAxisRaw("Horizontal");
-        continousActions[1] = Input.GetAxisRaw("Vertical");
+        if((int)Input.GetAxisRaw("Horizontal") == 0) {
+            discreteActions[0] = 0;
+        } else if((int)Input.GetAxisRaw("Horizontal") == 1) {
+            discreteActions[0] = 1;
+        } else if((int)Input.GetAxisRaw("Horizontal") == -1) {
+            discreteActions[0] = 2;
+        }
+
+        if((int)Input.GetAxisRaw("Vertical") == 0) {
+            discreteActions[1] = 0;
+        } else if((int)Input.GetAxisRaw("Vertical") == 1) {
+            discreteActions[1] = 1;
+        } else if ((int)Input.GetAxisRaw("Vertical") == -1) {
+            discreteActions[1] = 2;
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

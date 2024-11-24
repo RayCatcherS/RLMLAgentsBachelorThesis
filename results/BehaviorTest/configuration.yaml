@@ -3,10 +3,10 @@ behaviors:
   BehaviorTest:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 128
-      buffer_size: 2048
+      batch_size: 1024
+      buffer_size: 20480
       learning_rate: 0.0003
-      beta: 0.01
+      beta: 0.02
       epsilon: 0.2
       lambd: 0.95
       num_epoch: 3
@@ -35,10 +35,23 @@ behaviors:
           memory: null
           goal_conditioning_type: hyper
           deterministic: false
+      curiosity:
+        gamma: 0.99
+        strength: 0.02
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+        learning_rate: 0.0003
+        encoding_size: 128
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 1300000
+    max_steps: 15000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -69,8 +82,8 @@ checkpoint_settings:
   run_id: BehaviorTest
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results
