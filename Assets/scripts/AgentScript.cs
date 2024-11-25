@@ -1,16 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.AI.Navigation;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
-using UnityEngine.AI;
 
 
-public class TestAgentScript : Agent
+public class AgentScript : Agent
 {
 
     [SerializeField] private EnvironmentController gameEnvironmentController;
@@ -29,20 +25,11 @@ public class TestAgentScript : Agent
     private float distanceReward = 0;
 
 
-    // curriculum learning 
-    private int maxStepHyperparameter = 0;
-
-    public void Start() {
-
-    }
-
-
     private BehaviorType behaviorType;
 
     public override void OnEpisodeBegin() {
 
         // carica environment in base al behaviour type
-        int academySteps = Academy.Instance.StepCount;
         behaviorType = GetComponent<BehaviorParameters>().BehaviorType;
         
         switch(behaviorType) {
@@ -59,7 +46,7 @@ public class TestAgentScript : Agent
             break;
 
             case BehaviorType.Default:
-                // carica l'ambiente in base al curriculum learning
+                // carica l'ambiente in base allo stato del curriculum learning
                 gameEnvironmentController.LoadEnvironment(
                     (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0)
                 );
@@ -68,8 +55,9 @@ public class TestAgentScript : Agent
 
        
 
-
+        //reset distance
         distanceReward = 0;
+
         //Posizione iniziale dell'agente(casuale)
         transform.position = gameEnvironmentController.GetRandPosSampleFromActualEnv() + new Vector3(0, 0.5f, 0);
         // rotazione casuale agente
@@ -175,12 +163,12 @@ public class TestAgentScript : Agent
         
         if(other.gameObject.tag == "goal") {
             AddReward(10f); //Incrementa il reward
-            StartCoroutine(PrintMessageRepeatedly(false));
+            StartCoroutine(PrintEpisodeOutcome(false));
             EndEpisode();
         } else if(other.gameObject.tag == "wall") {
             AddReward(-10f); //Incrementa il reward
             
-            StartCoroutine(PrintMessageRepeatedly(true));
+            StartCoroutine(PrintEpisodeOutcome(true));
             EndEpisode();
         } else {
             Debug.Log("Error, collision with:" + other.gameObject.tag.ToString());
@@ -210,7 +198,7 @@ public class TestAgentScript : Agent
         return -1;
     }
 
-    IEnumerator PrintMessageRepeatedly(bool wrongEnd) {
+    IEnumerator PrintEpisodeOutcome(bool wrongEnd) {
         if(wrongEnd) {
             floorRenderer.material = loseMateriall;
             yield return new WaitForSeconds(1f);

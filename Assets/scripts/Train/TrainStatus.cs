@@ -8,7 +8,7 @@ public class TrainStatus : MonoBehaviour
     void Start() {
 
         // Avvia la coroutine
-        StartCoroutine(CurriculumLearnLesson());
+        //StartCoroutine(CurriculumLearnLesson());
     }
 
     IEnumerator CurriculumLearnLesson() {

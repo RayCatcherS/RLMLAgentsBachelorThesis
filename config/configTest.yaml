@@ -36,14 +36,14 @@ environment_parameters:
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.20  # Cambia lezione al 10% del training 
+          threshold: 0.20  # Cambia lezione al 20% del training 
         value: 0
       # Seconda lezione
       - name: lesson1
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.40  # Cambia lezione al 30% del training 
+          threshold: 0.40  # Cambia lezione al 40% del training 
         value: 1
       # Terza lezione
       - name: lesson2
