@@ -1,44 +1,36 @@
 {
     "my_environment_parameter": {
-        "lesson_num": 3
+        "lesson_num": 2
     },
     "BehaviorTest": {
         "checkpoints": [
             {
-                "steps": 499978,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499978.onnx",
-                "reward": 9.689587784806887,
-                "creation_time": 1732465155.2420974,
+                "steps": 499936,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499936.onnx",
+                "reward": 15.054633441070715,
+                "creation_time": 1732587137.6551714,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499978.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499936.pt"
                 ]
             },
             {
-                "steps": 999948,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999948.onnx",
-                "reward": 9.278964634977676,
-                "creation_time": 1732465741.4737275,
+                "steps": 841608,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-841608.onnx",
+                "reward": null,
+                "creation_time": 1732587718.2566404,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999948.pt"
-                ]
-            },
-            {
-                "steps": 1000012,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.onnx",
-                "reward": 9.278964634977676,
-                "creation_time": 1732465741.5534964,
-                "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-841608.pt"
                 ]
             }
         ],
+        "elo": 1612.425895663846,
         "final_checkpoint": {
-            "steps": 1000012,
+            "steps": 841608,
             "file_path": "results\\BehaviorTest\\BehaviorTest.onnx",
-            "reward": 9.278964634977676,
-            "creation_time": 1732465741.5534964,
+            "reward": null,
+            "creation_time": 1732587718.2566404,
             "auxillary_file_paths": [
-                "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1000012.pt"
+                "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-841608.pt"
             ]
         }
     },
