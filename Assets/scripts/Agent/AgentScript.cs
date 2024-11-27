@@ -198,12 +198,9 @@ public class AgentScript : Agent
 
     // applica danno all'agente, [damageBy] rappresenta l'agente che ha inflitto il danno
     public void DamageAgent(int damagedBy) {
-        AddReward(-1f); //Incrementa penalità
+        AddReward(-1f); // penalità per il danno subito
         agentHealth = agentHealth - 1;
 
-
-        // penalità per il danno subito
-        AddReward(-5f);
 
         // update ui
         healthSlider.value = ((float)agentHealth / (float)maxAgentHealth);

@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 12000000
+    max_steps: 7000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7649
+          seed: 2829
           value: 0
       name: lesson0
       completion_criteria:
@@ -102,7 +102,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7650
+          seed: 2830
           value: 1
       name: lesson1
       completion_criteria:
@@ -115,7 +115,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7651
+          seed: 2831
           value: 2
       name: lesson2
       completion_criteria:
@@ -128,7 +128,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7652
+          seed: 2832
           value: 3
       name: lesson3
       completion_criteria:
@@ -142,8 +142,8 @@ checkpoint_settings:
   run_id: BehaviorTest
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results
