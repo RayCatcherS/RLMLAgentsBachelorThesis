@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 2
+    VectorObservationSize: 4
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -162,12 +162,13 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 30000
+  MaxStep: 40000
   gameEnvironmentController: {fileID: 0}
   agentMoveSpeed: 1
   agentRotationSpeed: 140
   maxAgentHealth: 10
   agentCannon: {fileID: 8892290983410017669}
+  environmentRaySensor: {fileID: 9006130753874484575}
   healthSlider: {fileID: 8766137187018724886}
   winMessage: {fileID: 8551950805408072481}
   loseMessage: {fileID: 1006653715100453082}
@@ -275,14 +276,15 @@ MonoBehaviour:
   m_SensorName: CannonBallRaySensor
   m_DetectableTags:
   - cannonBall
+  - wall
   m_RaysPerDirection: 16
   m_MaxRayDegrees: 57.07
   m_SphereCastRadius: 0.75
   m_RayLength: 61
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 256
-  m_ObservationStacks: 1
+    m_Bits: 320
+  m_ObservationStacks: 10
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -484,7 +486,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -4.72, y: 0}
   m_SizeDelta: {x: 0.57, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -618,7 +620,7 @@ MonoBehaviour:
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 576
-  m_ObservationStacks: 1
+  m_ObservationStacks: 10
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -1106,8 +1108,8 @@ RectTransform:
   m_Father: {fileID: 7559322329625145030}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1300,7 +1302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8702585374217010792
 RectTransform:
   m_ObjectHideFlags: 0

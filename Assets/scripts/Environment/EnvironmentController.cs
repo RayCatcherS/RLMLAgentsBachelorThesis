@@ -21,7 +21,7 @@ public class EnvironmentController : MonoBehaviour
         }
 
         // vettore agenti nell'environment
-        agents = FindObjectsOfType<AgentScript>();
+        agents = GetComponentsInChildren<AgentScript>();
     }
     public void LoadEnvironment(int index) {
         for(int i = 0; i < environments.Count; i++) {
@@ -57,6 +57,8 @@ public class EnvironmentController : MonoBehaviour
         for(int i = 0; i < agents.Length; i++) {
             agents[i].EndEpisode();
         }
+
+
 
         // Stampa l'esito dell'episodio
         ViewEpisodeOutcome(false);

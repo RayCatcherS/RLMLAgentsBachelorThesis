@@ -65,13 +65,11 @@ public class CannonBall : MonoBehaviour {
 
             
             // applica penalità per colpo errato
-            agentScript.AddReward(-1);
+            agentScript.AddReward(-5);
             
 
             // Disattiva il proiettile
             gameObject.SetActive(false);
-
-            //agentScript.EndEpisode();
         }
     }
 

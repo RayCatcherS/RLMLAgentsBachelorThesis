@@ -23,15 +23,15 @@ behaviors:
       vis_encode_type: simple
 
     # Trainer configurations common to all trainers
-    max_steps: 3000000  # Step massimi per l'addestramento
+    max_steps: 7000000  # Step massimi per l'addestramento
     keep_checkpoints: 5
     time_horizon: 64
     summary_freq: 60000
 
     # self-play
     self_play:
-      save_steps: 20000
-      team_change: 100000
+      save_steps: 60000
+      team_change: 360000
       play_against_latest_model_ratio: 0.5
       window: 12
       

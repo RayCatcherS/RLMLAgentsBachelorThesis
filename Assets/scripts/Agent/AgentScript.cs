@@ -23,6 +23,7 @@ public class AgentScript : Agent
 
     [Header("Agent Components")]
     [SerializeField] private AgentCannon agentCannon;
+    [SerializeField] private RayPerceptionSensorComponent3D environmentRaySensor;
 
     [Header("Agent UI")]
     [SerializeField] private Slider healthSlider;
@@ -84,6 +85,12 @@ public class AgentScript : Agent
         sensor.AddObservation(agentCannon.CanShoot());
         sensor.AddObservation(agentHealth);
         
+
+        // rileva la presenza di un agente nemico e osserva la sua direzione
+        sensor.AddObservation(DetectedEnemyAgent());
+
+        // direzione dell'agente
+        sensor.AddObservation(gameObject.transform.eulerAngles.y);
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -139,7 +146,7 @@ public class AgentScript : Agent
         rb.AddForce(dirToGo * agentMoveSpeed, ForceMode.VelocityChange);
 
 
-        float timePenalty = -0.7f / MaxStep;
+        float timePenalty = -4f / MaxStep;
         AddReward(timePenalty);
 
 
@@ -211,6 +218,9 @@ public class AgentScript : Agent
         if(collision.gameObject.tag == "wall") {
 
             AddReward(-1f); //Incrementa penalità
+
+        } else if(collision.gameObject.tag == "agent") {
+            AddReward(-1f); //Incrementa reward
         }
     }
 
@@ -228,6 +238,27 @@ public class AgentScript : Agent
 
                 if(rayOutputs[i].HitGameObject.gameObject.tag == tagToDetect) {
                     return rayOutputs[i].HitFraction;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+
+    // se c'è un agente nel campo visivo, ritorna la sua direzione(restituisce [0, 360] gradi, -1 se non rilevato)
+    private float DetectedEnemyAgent() {
+
+        var rayOutputs = RayPerceptionSensor.Perceive(environmentRaySensor.GetRayPerceptionInput()).RayOutputs;
+        int lengthOfRayOutputs = rayOutputs.Length;
+
+        for(int i = 0; i < lengthOfRayOutputs; i++) {
+            GameObject agentHitted = rayOutputs[i].HitGameObject;
+            if(agentHitted != null) {
+
+                if(agentHitted.gameObject.tag == "agent") {
+
+                    return agentHitted.gameObject.transform.eulerAngles.y;
                 }
             }
         }
