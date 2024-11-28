@@ -17,7 +17,14 @@ public class AgentScript : Agent
     [SerializeField] private float agentMoveSpeed;
     [SerializeField] private float agentRotationSpeed;
     [SerializeField] private int maxAgentHealth = 10;
+    [SerializeField] private int maxAgentAmmo = 35;
     private int agentHealth;
+    // get vita agente
+    public int GetAgentHealth() {
+        return agentHealth;
+    }
+
+    private int agentAmmo;
     
     
 
@@ -25,7 +32,11 @@ public class AgentScript : Agent
     [SerializeField] private AgentCannon agentCannon;
     [SerializeField] private RayPerceptionSensorComponent3D environmentRaySensor;
 
+    [Header("Opponent agent components")]
+    [SerializeField] private AgentScript opponentAgent;
+
     [Header("Agent UI")]
+    [SerializeField] private Text ammoText;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Text winMessage;
     [SerializeField] private Text loseMessage;
@@ -36,6 +47,10 @@ public class AgentScript : Agent
     private BehaviorType behaviorType;
 
     public override void OnEpisodeBegin() {
+
+        //resetta ammo
+        agentAmmo = maxAgentAmmo;
+        ammoText.text = agentAmmo.ToString();
 
         // resetta la vita dell'agente
         agentHealth = maxAgentHealth;
@@ -84,13 +99,16 @@ public class AgentScript : Agent
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(agentCannon.CanShoot());
         sensor.AddObservation(agentHealth);
-        
+        sensor.AddObservation(agentAmmo);
 
-        // rileva la presenza di un agente nemico e osserva la sua direzione
+        // rileva direzione agente avversario
         sensor.AddObservation(DetectedEnemyAgent());
 
         // direzione dell'agente
         sensor.AddObservation(gameObject.transform.eulerAngles.y);
+
+        // vita dell'agente avversario
+        sensor.AddObservation(opponentAgent.GetAgentHealth());
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -107,10 +125,29 @@ public class AgentScript : Agent
         if(shootRaw == 0) {
             
         } else if(shootRaw == 1 && agentCannon.CanShoot()) {
-            agentCannon.Shoot(gameObject.GetComponent<BehaviorParameters>().TeamId, this);
 
-            // Penalizza leggermente per ogni sparo
-            AddReward(-1000/MaxStep);
+            if(agentAmmo > 0) {
+                agentCannon.Shoot(gameObject.GetComponent<BehaviorParameters>().TeamId, this);
+
+                agentAmmo--;
+                ammoText.text = agentAmmo.ToString();
+
+                // Penalizza per ogni sparo
+                AddReward(-1 / maxAgentAmmo);
+
+                if(agentAmmo == 0) {
+                    gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+                    gameObject.GetComponent<BehaviorParameters>().TeamId
+                    );
+                }
+
+
+            } else {
+                gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+                    gameObject.GetComponent<BehaviorParameters>().TeamId
+                );
+            }
+
         }
 
         if(rotateRaw == 0) {
@@ -146,7 +183,7 @@ public class AgentScript : Agent
         rb.AddForce(dirToGo * agentMoveSpeed, ForceMode.VelocityChange);
 
 
-        float timePenalty = -4f / MaxStep;
+        float timePenalty = -10f / MaxStep;
         AddReward(timePenalty);
 
 
@@ -207,14 +244,16 @@ public class AgentScript : Agent
 
         // l'agente ha perso
         if(agentHealth == 0) {
-            gameEnvironmentController.EndEnvironmentEpisode(damagedBy);
+            gameEnvironmentController.EndEnvironmentEpisodeWithOneWin(damagedBy);
         }
     }
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag == "wall") {
 
-            AddReward(-1f); //Incrementa penalità
+            gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+                gameObject.GetComponent<BehaviorParameters>().TeamId
+            );
 
         } else if(collision.gameObject.tag == "agent") {
             AddReward(-1f); //Incrementa reward

@@ -38,17 +38,17 @@ public class EnvironmentController : MonoBehaviour
         return environments[currentEnvironmentIndex].GetComponent<Environment>().GetRandomNavMeshPosition();
     }
 
-    public void EndEnvironmentEpisode(int winningAgent) {
+    public void EndEnvironmentEpisodeWithOneWin(int winningAgent) {
 
-        Debug.Log("EndEnvironmentEpisode");
+        Debug.Log("Win");
 
         // premia l'agente vincitore e penalizza gli altri(perdenti)
         for(int i = 0; i < agents.Length; i++) {
 
             if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == winningAgent) {
-                agents[i].AddReward(20f);
+                agents[i].AddReward(10f);
             } else {
-                agents[i].AddReward(-20f);
+                agents[i].AddReward(-10f);
             }
         }
 
@@ -63,6 +63,25 @@ public class EnvironmentController : MonoBehaviour
         // Stampa l'esito dell'episodio
         ViewEpisodeOutcome(false);
         ViewWinningAgent(winningAgent);
+    }
+
+    public void EndEnvironmentEpisodeWithOneLose(int loserAgent) {
+
+        // penalizza solo l'agente perdente
+        for(int i = 0; i < agents.Length; i++) {
+
+            if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == loserAgent) {
+                agents[i].AddReward(-10f);
+            }
+        }
+
+        // termina episodio per tutti gli agenti
+        for(int i = 0; i < agents.Length; i++) {
+            agents[i].EndEpisode();
+        }
+
+        // Stampa l'esito dell'episodio
+        ViewEpisodeOutcome(true);
     }
 
     // visualizza esito episodio

@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 7000000
+    max_steps: 10000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2829
+          seed: 3061
           value: 0
       name: lesson0
       completion_criteria:
@@ -97,12 +97,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.15
+        threshold: 0.1
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2830
+          seed: 3062
           value: 1
       name: lesson1
       completion_criteria:
@@ -110,12 +110,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.25
+        threshold: 0.17
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2831
+          seed: 3063
           value: 2
       name: lesson2
       completion_criteria:
@@ -123,12 +123,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.45
+        threshold: 0.35
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2832
+          seed: 3064
           value: 3
       name: lesson3
       completion_criteria:
@@ -136,14 +136,14 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.7
+        threshold: 0.8
         require_reset: false
 checkpoint_settings:
   run_id: BehaviorTest
   initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results
