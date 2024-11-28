@@ -7,6 +7,7 @@ public class EnvironmentController : MonoBehaviour
 {
     [SerializeField] List<GameObject> environments = new List<GameObject>();
     [SerializeField] private AgentScript [] agents; 
+
     private int currentEnvironmentIndex = 0;
 
     [Header("Outcome Materials")]
@@ -46,10 +47,10 @@ public class EnvironmentController : MonoBehaviour
         for(int i = 0; i < agents.Length; i++) {
 
             if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == winningAgent) {
-                agents[i].AddReward(10f);
-            } else {
-                agents[i].AddReward(-10f);
-            }
+                agents[i].AddReward(agents[i].GetMaxAgentHealth());
+            } //else {
+              //  agents[i].AddReward(-10f);
+            //}
         }
 
 
@@ -65,13 +66,13 @@ public class EnvironmentController : MonoBehaviour
         ViewWinningAgent(winningAgent);
     }
 
-    public void EndEnvironmentEpisodeWithOneLose(int loserAgent) {
+    public void EndEnvironmentEpisodeWithOneLose(int loserAgent, float penalty) {
 
         // penalizza solo l'agente perdente
         for(int i = 0; i < agents.Length; i++) {
 
             if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == loserAgent) {
-                agents[i].AddReward(-10f);
+                agents[i].AddReward(-agents[i].GetMaxAgentHealth());
             }
         }
 
@@ -82,6 +83,16 @@ public class EnvironmentController : MonoBehaviour
 
         // Stampa l'esito dell'episodio
         ViewEpisodeOutcome(true);
+    }
+
+    public void EndEnvironemntEpisode() {
+        // termina episodio per tutti gli agenti
+        for(int i = 0; i < agents.Length; i++) {
+            agents[i].EndEpisode();
+        }
+
+        // Stampa l'esito dell'episodio
+        ViewEpisodeOutcome(false);
     }
 
     // visualizza esito episodio

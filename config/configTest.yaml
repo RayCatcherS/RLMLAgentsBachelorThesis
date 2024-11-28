@@ -4,11 +4,10 @@ behaviors:
     
     hyperparameters:
       # Hyperparameters common to PPO and SAC
-      batch_size: 1024
-      buffer_size: 20480
+      batch_size: 128
+      buffer_size: 2048
       learning_rate: 0.0003
       learning_rate_schedule: linear
-
       # PPO-specific hyperparameters
       beta: 0.02
       epsilon: 0.2
@@ -23,19 +22,16 @@ behaviors:
       vis_encode_type: simple
 
     # Trainer configurations common to all trainers
-    max_steps: 10000000  # Step massimi per l'addestramento
+    max_steps: 7000000  # Step massimi per l'addestramento
     keep_checkpoints: 5
     time_horizon: 64
     summary_freq: 60000
 
     # self-play
     self_play:
-      save_steps: 60000
-      team_change: 360000
-      play_against_latest_model_ratio: 0.5
-      window: 12
-      
-      
+      save_steps: 100000
+      play_against_latest_model_ratio: 0.35
+      window: 4
 
     reward_signals:
       # environment reward (default)
@@ -49,6 +45,10 @@ behaviors:
         strength: 0.02
         encoding_size: 128
         learning_rate: 0.0003
+
+
+
+# indice valori apprendimento[index environment, qta colpi]
 environment_parameters:
   my_environment_parameter:
     curriculum:
@@ -57,21 +57,21 @@ environment_parameters:
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.10  # Cambia lezione al 10% del training 
+          threshold: 0.25  # Cambia lezione al 10% del training 
         value: 0
       # Seconda lezione
       - name: lesson1
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.17  # Cambia lezione al 20% del training 
+          threshold: 0.35  # Cambia lezione al 20% del training 
         value: 1
       # Terza lezione
       - name: lesson2
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.35  # Cambia lezione al 50% del training 
+          threshold: 0.60  # Cambia lezione al 50% del training 
         value: 2
       # Quarta lezione
       - name: lesson3

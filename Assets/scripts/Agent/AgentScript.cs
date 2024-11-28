@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class AgentScript : Agent
 {
     [Header("Environment Settings")]
-    [SerializeField] private EnvironmentController gameEnvironmentController;
+    [SerializeField] public EnvironmentController gameEnvironmentController;
 
 
 
@@ -17,7 +17,25 @@ public class AgentScript : Agent
     [SerializeField] private float agentMoveSpeed;
     [SerializeField] private float agentRotationSpeed;
     [SerializeField] private int maxAgentHealth = 10;
-    [SerializeField] private int maxAgentAmmo = 35;
+    public int GetMaxAgentHealth() {
+        return maxAgentHealth;
+    }
+    public int GetMaxAgentAmmo() {
+        int lesson = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0);
+        int maxAgentAmmo = 0;
+
+        if (lesson == 0) {
+            maxAgentAmmo = 150;
+        } else if (lesson == 1) {
+            maxAgentAmmo = 90;
+        } else if (lesson == 2) {
+            maxAgentAmmo = 50;
+        } else if (lesson == 3) {
+            maxAgentAmmo = 25;
+        }
+
+        return maxAgentAmmo;
+    }
     private int agentHealth;
     // get vita agente
     public int GetAgentHealth() {
@@ -49,7 +67,7 @@ public class AgentScript : Agent
     public override void OnEpisodeBegin() {
 
         //resetta ammo
-        agentAmmo = maxAgentAmmo;
+        agentAmmo = GetMaxAgentAmmo();
         ammoText.text = agentAmmo.ToString();
 
         // resetta la vita dell'agente
@@ -58,7 +76,8 @@ public class AgentScript : Agent
 
         // carica environment in base al behaviour type
         behaviorType = GetComponent<BehaviorParameters>().BehaviorType;
-        
+
+
         switch(behaviorType) {
             case BehaviorType.InferenceOnly:
                 gameEnvironmentController.LoadEnvironment(
@@ -98,28 +117,28 @@ public class AgentScript : Agent
 
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(agentCannon.CanShoot());
-        sensor.AddObservation(agentHealth);
-        sensor.AddObservation(agentAmmo);
+        sensor.AddObservation(agentHealth / maxAgentHealth); // salute normalizzata
+        sensor.AddObservation(agentAmmo / GetMaxAgentAmmo()); // ammo normalizzata
 
         // rileva direzione agente avversario
         OppositeAgentInformation oppositeAgentInformation = DetectedEnemyAgent();
 
         // posizione dell'agente 
-        sensor.AddObservation(gameObject.transform.position);
+        sensor.AddObservation(gameObject.transform.localPosition);
 
         // posizione agente avversario
-        sensor.AddObservation(oppositeAgentInformation.agentPosition);
+        sensor.AddObservation(oppositeAgentInformation.agentLocalPosition);
 
 
         // direzione dell'agente
-        sensor.AddObservation(gameObject.transform.eulerAngles.y);
+        sensor.AddObservation(gameObject.transform.localEulerAngles.y / 360.0f); // rotazione normalizzata
 
         // direzione dell'agente avversario
-        sensor.AddObservation(oppositeAgentInformation.agentDirection);
+        sensor.AddObservation(oppositeAgentInformation.agentDirection / 360.0f);// rotazione normalizzata
 
 
         // vita dell'agente avversario
-        sensor.AddObservation(opponentAgent.GetAgentHealth());
+        sensor.AddObservation(opponentAgent.GetAgentHealth() / maxAgentHealth); // vita normalizzata
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -131,8 +150,9 @@ public class AgentScript : Agent
         int shootRaw = actions.DiscreteActions[2]; // Sparo
 
 
-        
+
         // Mappa i valori dell'input
+        //Debug.Log("shootRaw: " + shootRaw);
         if(shootRaw == 0) {
             
         } else if(shootRaw == 1 && agentCannon.CanShoot()) {
@@ -144,23 +164,28 @@ public class AgentScript : Agent
                 ammoText.text = agentAmmo.ToString();
 
                 // Penalizza per ogni sparo
-                AddReward(-10 / maxAgentAmmo);
+                //AddReward(-10 / maxAgentAmmo);
 
                 if(agentAmmo == 0) {
                     gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
-                    gameObject.GetComponent<BehaviorParameters>().TeamId
+                    gameObject.GetComponent<BehaviorParameters>().TeamId,
+                    -1f
                     );
                 }
 
 
             } else {
                 gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
-                    gameObject.GetComponent<BehaviorParameters>().TeamId
+                gameObject.GetComponent<BehaviorParameters>().TeamId,
+                -1f
                 );
             }
 
         }
 
+
+        //Debug.Log("move: " + moveYRaw);
+        //Debug.Log("rotate: " + rotateRaw);
         if(rotateRaw == 0) {
             rotate = 0;
         } else if(rotateRaw == 1) {
@@ -169,6 +194,7 @@ public class AgentScript : Agent
             rotate = -1;
         }
 
+        
         if(moveYRaw == 0) {
             moveY = 0;
         } else if(moveYRaw == 1) {
@@ -194,20 +220,21 @@ public class AgentScript : Agent
         rb.AddForce(dirToGo * agentMoveSpeed, ForceMode.VelocityChange);
 
 
-        float timePenalty = -10f / MaxStep;
+        // Penalizza per il tempo trascorso
+        float timePenalty = -1f / MaxStep;
         AddReward(timePenalty);
 
 
-        // reward rilevamento del goal con raycast(disatanza hit ray cast)
-        /*
-        float distance = DistanceDetectedTag("goal");
-        if(distance > 0) {
+        // reward rilevamento agente con raycast
+        float value = DistanceDetectedTag("goal");
+        if(value > 0) {
 
-            float distRew = (1f - distance) / MaxStep;
-            AddReward(distRew);
+            //float distRew = (1f - value) / MaxStep;
+            float detectingReward = 2f / MaxStep;
+            AddReward(detectingReward);
 
-            distanceReward = distanceReward + distRew;
-        }*/
+            //distanceReward = distanceReward + distRew;
+        }
     }
 
     public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask) {
@@ -261,22 +288,29 @@ public class AgentScript : Agent
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag == "wall") {
-
             gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
-                gameObject.GetComponent<BehaviorParameters>().TeamId
+            gameObject.GetComponent<BehaviorParameters>().TeamId,
+            -1f
             );
+            //gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+            //    gameObject.GetComponent<BehaviorParameters>().TeamId
+            //);
 
         } else if(collision.gameObject.tag == "agent") {
-            AddReward(-1f); //Incrementa reward
+            gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+                gameObject.GetComponent<BehaviorParameters>().TeamId,
+                -1f
+                );
+            //AddReward(-1f); // penalità per la collisione con un altro agente
         }
     }
 
+    // restituisce la distanza dal tag rilevato, -1 se non rilevato
     private float DistanceDetectedTag(string tagToDetect) {
         // Accedi al componente Ray Perception Sensor
-        RayPerceptionSensorComponent3D sensor = GetComponentInChildren<RayPerceptionSensorComponent3D>();
  
         
-        var rayOutputs = RayPerceptionSensor.Perceive(sensor.GetRayPerceptionInput()).RayOutputs;
+        var rayOutputs = RayPerceptionSensor.Perceive(environmentRaySensor.GetRayPerceptionInput()).RayOutputs;
         int lengthOfRayOutputs = rayOutputs.Length;
 
         for(int i = 0; i < lengthOfRayOutputs; i++) {
@@ -307,8 +341,8 @@ public class AgentScript : Agent
 
                 if(agentHitted.gameObject.tag == "agent") {
 
-                    lastOppositeAgentPosition = agentHitted.gameObject.transform.position;
-                    lastOppositeAgentRotation = agentHitted.gameObject.transform.eulerAngles.y;
+                    lastOppositeAgentPosition = agentHitted.gameObject.transform.localPosition;
+                    lastOppositeAgentRotation = agentHitted.gameObject.transform.localEulerAngles.y;
                     return new OppositeAgentInformation(
                         agentHitted.gameObject.transform.eulerAngles.y,
                         agentHitted.gameObject.transform.position
@@ -339,10 +373,10 @@ public class AgentScript : Agent
 
 public class OppositeAgentInformation {
     public float agentDirection = 0;
-    public Vector3 agentPosition = Vector3.zero;
+    public Vector3 agentLocalPosition = Vector3.zero;
 
-    public OppositeAgentInformation(float agentDirection, Vector3 agentPosition) {
-        this.agentDirection = agentDirection;
-        this.agentPosition = agentPosition;
+    public OppositeAgentInformation(float agentLocalDirection, Vector3 agentLocalPosition) {
+        this.agentDirection = agentLocalDirection;
+        this.agentLocalPosition = agentLocalPosition;
     }
 }

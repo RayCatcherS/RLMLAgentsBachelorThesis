@@ -37,6 +37,7 @@ public class CannonBall : MonoBehaviour {
         // Se il proiettile colpisce un agente
         if(other.CompareTag("agent")) {
             AgentScript hittedAgent = other.GetComponent<AgentScript>();
+
             if(other.GetComponent<BehaviorParameters>().TeamId == agentScript.gameObject.GetComponent<BehaviorParameters>().TeamId) {
                 // Se il proiettile colpisce l'agente che lo ha sparato, non fare nulla
 
@@ -45,12 +46,17 @@ public class CannonBall : MonoBehaviour {
                 hittedAgent.DamageAgent(agentScript.gameObject.GetComponent<BehaviorParameters>().TeamId);
 
                 // Applica una ricompensa all'agente che ha sparato il proiettile
-                agentScript.AddReward(1f);
-                
+                agentScript.AddReward(1);
 
+                Debug.Log("colpito");
                 // Disattiva il proiettile
                 gameObject.SetActive(false);
+
+
+                // se l'agente è stato colpito termina episodio
+                agentScript.gameEnvironmentController.EndEnvironemntEpisode();
             }
+
         } else if(other.CompareTag("cannonBall")) {
 
             if(other.GetComponent<CannonBall>().agentScript.gameObject.GetComponent<BehaviorParameters>().TeamId == 
@@ -64,7 +70,7 @@ public class CannonBall : MonoBehaviour {
         } else {
 
             // applica penalità per colpo errato
-            agentScript.AddReward(-1);
+            agentScript.AddReward(-1/ agentScript.GetMaxAgentAmmo());
             
 
             // Disattiva il proiettile
