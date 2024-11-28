@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
-    NumStackedVectorObservations: 1
+    VectorObservationSize: 12
+    NumStackedVectorObservations: 8
     m_ActionSpec:
       m_NumContinuousActions: 0
       BranchSizes: 030000000300000002000000
@@ -555,14 +555,13 @@ MonoBehaviour:
   m_DetectableTags:
   - wall
   - agent
-  - cannonBall
   m_RaysPerDirection: 16
   m_MaxRayDegrees: 57.07
   m_SphereCastRadius: 0.75
   m_RayLength: 61
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 832
+    m_Bits: 576
   m_ObservationStacks: 10
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}

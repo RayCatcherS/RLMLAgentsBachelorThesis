@@ -102,10 +102,21 @@ public class AgentScript : Agent
         sensor.AddObservation(agentAmmo);
 
         // rileva direzione agente avversario
-        sensor.AddObservation(DetectedEnemyAgent());
+        OppositeAgentInformation oppositeAgentInformation = DetectedEnemyAgent();
+
+        // posizione dell'agente 
+        sensor.AddObservation(gameObject.transform.position);
+
+        // posizione agente avversario
+        sensor.AddObservation(oppositeAgentInformation.agentPosition);
+
 
         // direzione dell'agente
         sensor.AddObservation(gameObject.transform.eulerAngles.y);
+
+        // direzione dell'agente avversario
+        sensor.AddObservation(oppositeAgentInformation.agentDirection);
+
 
         // vita dell'agente avversario
         sensor.AddObservation(opponentAgent.GetAgentHealth());
@@ -133,7 +144,7 @@ public class AgentScript : Agent
                 ammoText.text = agentAmmo.ToString();
 
                 // Penalizza per ogni sparo
-                AddReward(-1 / maxAgentAmmo);
+                AddReward(-10 / maxAgentAmmo);
 
                 if(agentAmmo == 0) {
                     gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
@@ -283,7 +294,9 @@ public class AgentScript : Agent
 
 
     // se c'è un agente nel campo visivo, ritorna la sua direzione(restituisce [0, 360] gradi, -1 se non rilevato)
-    private float DetectedEnemyAgent() {
+    private Vector3 lastOppositeAgentPosition = new Vector3(0, 0, 0);
+    private float lastOppositeAgentRotation = 0;
+    private OppositeAgentInformation DetectedEnemyAgent() {
 
         var rayOutputs = RayPerceptionSensor.Perceive(environmentRaySensor.GetRayPerceptionInput()).RayOutputs;
         int lengthOfRayOutputs = rayOutputs.Length;
@@ -294,12 +307,20 @@ public class AgentScript : Agent
 
                 if(agentHitted.gameObject.tag == "agent") {
 
-                    return agentHitted.gameObject.transform.eulerAngles.y;
+                    lastOppositeAgentPosition = agentHitted.gameObject.transform.position;
+                    lastOppositeAgentRotation = agentHitted.gameObject.transform.eulerAngles.y;
+                    return new OppositeAgentInformation(
+                        agentHitted.gameObject.transform.eulerAngles.y,
+                        agentHitted.gameObject.transform.position
+                    );
                 }
             }
         }
 
-        return -1;
+        return new OppositeAgentInformation(
+            lastOppositeAgentRotation,
+            lastOppositeAgentPosition
+        );
     }
 
     public void ShowOutcomeMessage(bool winner) {
@@ -313,5 +334,15 @@ public class AgentScript : Agent
     public void DisableOutcomeMessage() {
         winMessage.gameObject.SetActive(false);
         loseMessage.gameObject.SetActive(false);
+    }
+}
+
+public class OppositeAgentInformation {
+    public float agentDirection = 0;
+    public Vector3 agentPosition = Vector3.zero;
+
+    public OppositeAgentInformation(float agentDirection, Vector3 agentPosition) {
+        this.agentDirection = agentDirection;
+        this.agentPosition = agentPosition;
     }
 }

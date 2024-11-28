@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3061
+          seed: 8179
           value: 0
       name: lesson0
       completion_criteria:
@@ -102,7 +102,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3062
+          seed: 8180
           value: 1
       name: lesson1
       completion_criteria:
@@ -115,7 +115,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3063
+          seed: 8181
           value: 2
       name: lesson2
       completion_criteria:
@@ -128,7 +128,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 3064
+          seed: 8182
           value: 3
       name: lesson3
       completion_criteria:
