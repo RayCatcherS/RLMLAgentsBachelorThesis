@@ -3,8 +3,8 @@ behaviors:
   BehaviorTest:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 128
-      buffer_size: 2048
+      batch_size: 1024
+      buffer_size: 20480
       learning_rate: 0.0003
       beta: 0.02
       epsilon: 0.2
@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 10000000
+    max_steps: 1300000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 670
+          seed: 1691
           value: 0
       name: lesson0
       completion_criteria:
@@ -97,12 +97,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.25
+        threshold: 0.3
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 671
+          seed: 1692
           value: 1
       name: lesson1
       completion_criteria:
@@ -110,12 +110,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.45
+        threshold: 0.4
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 672
+          seed: 1693
           value: 2
       name: lesson2
       completion_criteria:
@@ -123,12 +123,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.75
+        threshold: 0.6
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 673
+          seed: 1694
           value: 3
       name: lesson3
       completion_criteria:
@@ -136,7 +136,7 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.8
+        threshold: 0.99
         require_reset: false
 checkpoint_settings:
   run_id: BehaviorTest

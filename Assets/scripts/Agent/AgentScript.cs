@@ -29,9 +29,9 @@ public class AgentScript : Agent
         } else if (lesson == 1) {
             maxAgentAmmo = 90;
         } else if (lesson == 2) {
-            maxAgentAmmo = 90;
+            maxAgentAmmo = 50;
         } else if (lesson == 3) {
-            maxAgentAmmo = 90;
+            maxAgentAmmo = 30;
         }
 
         return maxAgentAmmo;

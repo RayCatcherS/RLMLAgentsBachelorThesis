@@ -3,61 +3,61 @@
         "lesson_num": 3
     },
     "BehaviorTest": {
+        "elo": 1329.3246179086975,
         "checkpoints": [
             {
-                "steps": 6499974,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6499974.onnx",
-                "reward": -0.34468754671979696,
-                "creation_time": 1732845205.06077,
+                "steps": 296124,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-296124.onnx",
+                "reward": 3.550222264727957,
+                "creation_time": 1732849527.2237997,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6499974.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-296124.pt"
                 ]
             },
             {
-                "steps": 6522625,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6522625.onnx",
-                "reward": -3.2929167225956917,
-                "creation_time": 1732845359.2328753,
+                "steps": 499956,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499956.onnx",
+                "reward": 4.576766376460054,
+                "creation_time": 1732849941.5300324,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6522625.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-499956.pt"
                 ]
             },
             {
-                "steps": 6999978,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6999978.onnx",
-                "reward": null,
-                "creation_time": 1732846666.7987936,
+                "steps": 544751,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-544751.onnx",
+                "reward": 5.464243073663157,
+                "creation_time": 1732850087.8723083,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-6999978.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-544751.pt"
                 ]
             },
             {
-                "steps": 7499952,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-7499952.onnx",
-                "reward": -10.012749671936035,
-                "creation_time": 1732847936.9802132,
+                "steps": 999961,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999961.onnx",
+                "reward": 3.4479456072187293,
+                "creation_time": 1732850987.485082,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-7499952.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-999961.pt"
                 ]
             },
             {
-                "steps": 7558615,
-                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-7558615.onnx",
-                "reward": -0.9850000608712435,
-                "creation_time": 1732848202.9706717,
+                "steps": 1300074,
+                "file_path": "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1300074.onnx",
+                "reward": 3.667820651647591,
+                "creation_time": 1732851631.5704813,
                 "auxillary_file_paths": [
-                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-7558615.pt"
+                    "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1300074.pt"
                 ]
             }
         ],
-        "elo": -796.1685856169373,
         "final_checkpoint": {
-            "steps": 7558615,
+            "steps": 1300074,
             "file_path": "results\\BehaviorTest\\BehaviorTest.onnx",
-            "reward": -0.9850000608712435,
-            "creation_time": 1732848202.9706717,
+            "reward": 3.667820651647591,
+            "creation_time": 1732851631.5704813,
             "auxillary_file_paths": [
-                "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-7558615.pt"
+                "results\\BehaviorTest\\BehaviorTest\\BehaviorTest-1300074.pt"
             ]
         }
     },

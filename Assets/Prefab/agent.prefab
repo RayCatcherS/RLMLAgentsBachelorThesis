@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186573842458103569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.92}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_DetectableTags:
   - wall
   - agent
-  m_RaysPerDirection: 10
+  m_RaysPerDirection: 14
   m_MaxRayDegrees: 57.07
   m_SphereCastRadius: 0.75
   m_RayLength: 61
