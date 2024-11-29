@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 7000000
+    max_steps: 10000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 9374
+          seed: 670
           value: 0
       name: lesson0
       completion_criteria:
@@ -102,7 +102,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 9375
+          seed: 671
           value: 1
       name: lesson1
       completion_criteria:
@@ -110,12 +110,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.35
+        threshold: 0.45
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 9376
+          seed: 672
           value: 2
       name: lesson2
       completion_criteria:
@@ -123,12 +123,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.6
+        threshold: 0.75
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 9377
+          seed: 673
           value: 3
       name: lesson3
       completion_criteria:

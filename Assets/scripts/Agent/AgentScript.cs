@@ -29,9 +29,9 @@ public class AgentScript : Agent
         } else if (lesson == 1) {
             maxAgentAmmo = 90;
         } else if (lesson == 2) {
-            maxAgentAmmo = 50;
+            maxAgentAmmo = 90;
         } else if (lesson == 3) {
-            maxAgentAmmo = 25;
+            maxAgentAmmo = 90;
         }
 
         return maxAgentAmmo;
@@ -116,29 +116,32 @@ public class AgentScript : Agent
     }
 
     public override void CollectObservations(VectorSensor sensor) {
-        sensor.AddObservation(agentCannon.CanShoot());
+        //sensor.AddObservation(agentCannon.CanShoot());
         sensor.AddObservation(agentHealth / maxAgentHealth); // salute normalizzata
-        sensor.AddObservation(agentAmmo / GetMaxAgentAmmo()); // ammo normalizzata
+        sensor.AddObservation(agentAmmo / GetMaxAgentAmmo()); // ammo agente normalizzata
+
+
+
+        // se si reintroducono le posizioni !RICORDARSI DI RESETTARLE NELLA FUNZIONE! OnEpisodeBegin()
+
 
         // rileva direzione agente avversario
-        OppositeAgentInformation oppositeAgentInformation = DetectedEnemyAgent();
+        //OppositeAgentInformation oppositeAgentInformation = DetectedEnemyAgent();
 
         // posizione dell'agente 
-        sensor.AddObservation(gameObject.transform.localPosition);
+        //sensor.AddObservation(gameObject.transform.localPosition);
 
         // posizione agente avversario
-        sensor.AddObservation(oppositeAgentInformation.agentLocalPosition);
+        //sensor.AddObservation(oppositeAgentInformation.agentLocalPosition);
 
 
-        // direzione dell'agente
-        sensor.AddObservation(gameObject.transform.localEulerAngles.y / 360.0f); // rotazione normalizzata
-
-        // direzione dell'agente avversario
-        sensor.AddObservation(oppositeAgentInformation.agentDirection / 360.0f);// rotazione normalizzata
+        // // direzione dell'agente meno direzione dell'agente avversario
+        //sensor.AddObservation((gameObject.transform.localEulerAngles.y / 360.0f) - (oppositeAgentInformation.agentDirection / 360.0f)); // rotazione normalizzata
 
 
-        // vita dell'agente avversario
-        sensor.AddObservation(opponentAgent.GetAgentHealth() / maxAgentHealth); // vita normalizzata
+
+        // salue dell'agente avversario normalizzata
+        sensor.AddObservation(opponentAgent.GetAgentHealth() / maxAgentHealth); 
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -226,9 +229,8 @@ public class AgentScript : Agent
 
 
         // reward rilevamento agente con raycast
-        float value = DistanceDetectedTag("goal");
+        float value = DistanceDetectedTag("agent");
         if(value > 0) {
-
             //float distRew = (1f - value) / MaxStep;
             float detectingReward = 2f / MaxStep;
             AddReward(detectingReward);

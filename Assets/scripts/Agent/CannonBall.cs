@@ -46,7 +46,7 @@ public class CannonBall : MonoBehaviour {
                 hittedAgent.DamageAgent(agentScript.gameObject.GetComponent<BehaviorParameters>().TeamId);
 
                 // Applica una ricompensa all'agente che ha sparato il proiettile
-                agentScript.AddReward(1);
+                agentScript.AddReward(10);
 
                 Debug.Log("colpito");
                 // Disattiva il proiettile
@@ -70,7 +70,7 @@ public class CannonBall : MonoBehaviour {
         } else {
 
             // applica penalità per colpo errato
-            agentScript.AddReward(-1/ agentScript.GetMaxAgentAmmo());
+            agentScript.AddReward(-10/ agentScript.GetMaxAgentAmmo());
             
 
             // Disattiva il proiettile
