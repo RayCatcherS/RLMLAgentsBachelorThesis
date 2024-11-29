@@ -1,0 +1,51 @@
+{
+    "my_environment_parameter": {
+        "lesson_num": 3
+    },
+    "BehaviorTest": {
+        "checkpoints": [
+            {
+                "steps": 499973,
+                "file_path": "results\\RL\\BehaviorTest\\BehaviorTest-499973.onnx",
+                "reward": 5.536939616214709,
+                "creation_time": 1732909322.6017163,
+                "auxillary_file_paths": [
+                    "results\\RL\\BehaviorTest\\BehaviorTest-499973.pt"
+                ]
+            },
+            {
+                "steps": 999956,
+                "file_path": "results\\RL\\BehaviorTest\\BehaviorTest-999956.onnx",
+                "reward": 3.503406521905173,
+                "creation_time": 1732910240.0465627,
+                "auxillary_file_paths": [
+                    "results\\RL\\BehaviorTest\\BehaviorTest-999956.pt"
+                ]
+            },
+            {
+                "steps": 1300003,
+                "file_path": "results\\RL\\BehaviorTest\\BehaviorTest-1300003.onnx",
+                "reward": 4.154719416035067,
+                "creation_time": 1732910796.2147524,
+                "auxillary_file_paths": [
+                    "results\\RL\\BehaviorTest\\BehaviorTest-1300003.pt"
+                ]
+            }
+        ],
+        "elo": 1353.087719524658,
+        "final_checkpoint": {
+            "steps": 1300003,
+            "file_path": "results\\RL\\BehaviorTest.onnx",
+            "reward": 4.154719416035067,
+            "creation_time": 1732910796.2147524,
+            "auxillary_file_paths": [
+                "results\\RL\\BehaviorTest\\BehaviorTest-1300003.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu118"
+    }
+}

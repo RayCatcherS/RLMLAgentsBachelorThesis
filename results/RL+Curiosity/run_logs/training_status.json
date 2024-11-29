@@ -1,0 +1,51 @@
+{
+    "my_environment_parameter": {
+        "lesson_num": 3
+    },
+    "BehaviorTest": {
+        "checkpoints": [
+            {
+                "steps": 499969,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-499969.onnx",
+                "reward": 6.553014289381706,
+                "creation_time": 1732906732.4463985,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-499969.pt"
+                ]
+            },
+            {
+                "steps": 999981,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-999981.onnx",
+                "reward": 4.244632979433865,
+                "creation_time": 1732907745.2176354,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-999981.pt"
+                ]
+            },
+            {
+                "steps": 1300104,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1300104.onnx",
+                "reward": 2.645268586467137,
+                "creation_time": 1732908337.1779938,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1300104.pt"
+                ]
+            }
+        ],
+        "elo": 1369.9167180953718,
+        "final_checkpoint": {
+            "steps": 1300104,
+            "file_path": "results\\RL+Curiosity\\BehaviorTest.onnx",
+            "reward": 2.645268586467137,
+            "creation_time": 1732908337.1779938,
+            "auxillary_file_paths": [
+                "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1300104.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu118"
+    }
+}
