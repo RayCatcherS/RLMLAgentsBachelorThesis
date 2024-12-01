@@ -271,29 +271,63 @@ public class AgentScript : Agent
     // Funzione per testare il movimento dell'agente, sovrascrivendo le azioni del modello con quelle genrate da un input(tastiera)
     public override void Heuristic(in ActionBuffers actionsOut) {
         ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
-        
-        if((int)Input.GetAxisRaw("Horizontal") == 0) {
-            discreteActions[0] = 0;
-        } else if((int)Input.GetAxisRaw("Horizontal") == 1) {
-            discreteActions[0] = 1;
-        } else if((int)Input.GetAxisRaw("Horizontal") == -1) {
-            discreteActions[0] = 2;
+
+
+
+
+
+
+
+        if(gameObject.GetComponent<BehaviorParameters>().TeamId == 0) {
+            if(Input.GetKey(KeyCode.W)) {
+                discreteActions[1] = 1;
+            } else if(Input.GetKey(KeyCode.S)) {
+                discreteActions[1] = 2;
+            } else {
+                discreteActions[1] = 0;
+            }
+
+            if(Input.GetKey(KeyCode.D)) {
+                discreteActions[0] = 1;
+            } else if(Input.GetKey(KeyCode.A)) {
+                discreteActions[0] = 2;
+            } else {
+                discreteActions[0] = 0;
+            }
+
+            if(Input.GetKey(KeyCode.Space)) {
+                discreteActions[2] = 1;
+            } else {
+                discreteActions[2] = 0;
+            }
         }
 
-        if((int)Input.GetAxisRaw("Vertical") == 0) {
-            discreteActions[1] = 0;
-        } else if((int)Input.GetAxisRaw("Vertical") == 1) {
-            discreteActions[1] = 1;
-        } else if ((int)Input.GetAxisRaw("Vertical") == -1) {
-            discreteActions[1] = 2;
+
+        if(gameObject.GetComponent<BehaviorParameters>().TeamId == 1) {
+            if(Input.GetKey(KeyCode.UpArrow)) {
+                discreteActions[1] = 1;
+            } else if(Input.GetKey(KeyCode.DownArrow)) {
+                discreteActions[1] = 2;
+            } else {
+                discreteActions[1] = 0;
+            }
+
+            if(Input.GetKey(KeyCode.RightArrow)) {
+                discreteActions[0] = 1;
+            } else if(Input.GetKey(KeyCode.LeftArrow)) {
+                discreteActions[0] = 2;
+            } else {
+                discreteActions[0] = 0;
+            }
+
+            if(Input.GetKey(KeyCode.LeftShift)) {
+                discreteActions[2] = 1;
+            } else {
+                discreteActions[2] = 0;
+            }
         }
 
-        if(Input.GetKey(KeyCode.Space)) {
-            discreteActions[2] = 1; 
-        } else {
-            discreteActions[2] = 0;
-        }
-        
+
     }
 
 

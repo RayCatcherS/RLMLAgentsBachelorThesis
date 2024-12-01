@@ -9212,7 +9212,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 65713270382527341, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 120929553222029152, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9221,6 +9221,18 @@ PrefabInstance:
     - target: {fileID: 120929553222029152, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944581107028680968, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: Record
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 944581107028680968, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: DemonstrationName
+      value: recs
+      objectReference: {fileID: 0}
+    - target: {fileID: 944581107028680968, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: DemonstrationDirectory
+      value: Demos1
       objectReference: {fileID: 0}
     - target: {fileID: 954611959284764998, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_Model
@@ -9284,7 +9296,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634367438743650360, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634367438743650360, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5804999616992132958, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_Model
@@ -9293,6 +9309,18 @@ PrefabInstance:
     - target: {fileID: 5804999616992132958, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_BehaviorType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812780851022745360, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: Record
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812780851022745360, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: DemonstrationName
+      value: recs
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812780851022745360, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: DemonstrationDirectory
+      value: Demos2
       objectReference: {fileID: 0}
     - target: {fileID: 6637556157244203384, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_AnchorMax.x
