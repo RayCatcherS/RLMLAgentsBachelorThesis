@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 1300000
+    max_steps: 2500000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,9 +89,22 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 8934
+          seed: 4399
           value: 0
       name: lesson0
+      completion_criteria:
+        behavior: BehaviorTest
+        measure: progress
+        min_lesson_length: 0
+        signal_smoothing: true
+        threshold: 0.2
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 4400
+          value: 1
+      name: lesson1
       completion_criteria:
         behavior: BehaviorTest
         measure: progress
@@ -102,20 +115,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 8935
-          value: 1
-      name: lesson1
-      completion_criteria:
-        behavior: BehaviorTest
-        measure: progress
-        min_lesson_length: 0
-        signal_smoothing: true
-        threshold: 0.4
-        require_reset: false
-    - value:
-        sampler_type: constant
-        sampler_parameters:
-          seed: 8936
+          seed: 4401
           value: 2
       name: lesson2
       completion_criteria:
@@ -123,12 +123,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.6
+        threshold: 0.5
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 8937
+          seed: 4402
           value: 3
       name: lesson3
       completion_criteria:
@@ -142,8 +142,8 @@ checkpoint_settings:
   run_id: RL+Curiosity
   initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results

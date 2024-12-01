@@ -41,13 +41,11 @@ public class EnvironmentController : MonoBehaviour
 
     public void EndEnvironmentEpisodeWithOneWin(int winningAgent) {
 
-        Debug.Log("Win");
-
         // premia l'agente vincitore e penalizza gli altri(perdenti)
         for(int i = 0; i < agents.Length; i++) {
 
             if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == winningAgent) {
-                agents[i].AddReward(agents[i].GetMaxAgentHealth());
+                agents[i].AddReward(10);
             } //else {
               //  agents[i].AddReward(-10f);
             //}
@@ -72,7 +70,7 @@ public class EnvironmentController : MonoBehaviour
         for(int i = 0; i < agents.Length; i++) {
 
             if(agents[i].gameObject.GetComponent<BehaviorParameters>().TeamId == loserAgent) {
-                agents[i].AddReward(-agents[i].GetMaxAgentHealth());
+                agents[i].AddReward(-10);
             }
         }
 

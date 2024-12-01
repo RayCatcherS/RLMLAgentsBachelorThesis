@@ -22,7 +22,7 @@ behaviors:
       vis_encode_type: simple
 
     # Trainer configurations common to all trainers
-    max_steps: 1300000  # Step massimi per l'addestramento
+    max_steps: 4000000  # Step massimi per l'addestramento
     keep_checkpoints: 5
     time_horizon: 64
     summary_freq: 60000
@@ -50,21 +50,21 @@ environment_parameters:
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.30  # Cambia lezione al 10% del training 
+          threshold: 0.20  # Cambia lezione al 10% del training 
         value: 0
       # Seconda lezione
       - name: lesson1
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.40  # Cambia lezione al 20% del training 
+          threshold: 0.35  # Cambia lezione al 20% del training 
         value: 1
       # Terza lezione
       - name: lesson2
         completion_criteria:
           measure: progress
           behavior: BehaviorTest
-          threshold: 0.60  # Cambia lezione al 50% del training 
+          threshold: 0.50  # Cambia lezione al 50% del training 
         value: 2
       # Quarta lezione
       - name: lesson3
