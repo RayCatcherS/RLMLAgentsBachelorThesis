@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Unity.MLAgents.Policies;
 using UnityEngine;
 
-public class EnvironmentController : MonoBehaviour
-{
+public class EnvironmentController : MonoBehaviour {
+
+    [Header("Environment override")]
+    public bool curriculumLearningDisabled = false;
+
+    [Header("Environments")]
     [SerializeField] List<GameObject> environments = new List<GameObject>();
     [SerializeField] private AgentScript [] agents; 
 

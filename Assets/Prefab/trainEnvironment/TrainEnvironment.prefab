@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1009d3a3660b4024b9d9f9b057c6c9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curriculumLearningDisabled: 0
   environments:
   - {fileID: 7293759724479523995}
   - {fileID: 2268282888370288186}

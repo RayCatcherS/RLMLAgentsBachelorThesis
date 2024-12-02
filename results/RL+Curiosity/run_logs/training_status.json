@@ -5,59 +5,59 @@
     "BehaviorTest": {
         "checkpoints": [
             {
-                "steps": 1499961,
-                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1499961.onnx",
-                "reward": 4.298056584624749,
-                "creation_time": 1732987804.032363,
+                "steps": 3499992,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-3499992.onnx",
+                "reward": 3.0039965091464556,
+                "creation_time": 1733116934.7183897,
                 "auxillary_file_paths": [
-                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1499961.pt"
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-3499992.pt"
                 ]
             },
             {
-                "steps": 1800020,
-                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1800020.onnx",
-                "reward": 7.015392939959254,
-                "creation_time": 1732988404.0408916,
+                "steps": 3999973,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-3999973.onnx",
+                "reward": 2.8388083390918717,
+                "creation_time": 1733118003.4734385,
                 "auxillary_file_paths": [
-                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1800020.pt"
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-3999973.pt"
                 ]
             },
             {
-                "steps": 1999962,
-                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1999962.onnx",
-                "reward": 3.8805106664552125,
-                "creation_time": 1732988844.384959,
+                "steps": 4499985,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-4499985.onnx",
+                "reward": 4.807685135104866,
+                "creation_time": 1733119096.9773195,
                 "auxillary_file_paths": [
-                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-1999962.pt"
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-4499985.pt"
                 ]
             },
             {
-                "steps": 2499981,
-                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-2499981.onnx",
-                "reward": 4.776250010511528,
-                "creation_time": 1732989853.9276063,
+                "steps": 4999996,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-4999996.onnx",
+                "reward": 4.170749980371762,
+                "creation_time": 1733120192.6174154,
                 "auxillary_file_paths": [
-                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-2499981.pt"
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-4999996.pt"
                 ]
             },
             {
-                "steps": 2500109,
-                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-2500109.onnx",
-                "reward": 4.776250010511528,
-                "creation_time": 1732989854.0446095,
+                "steps": 5000047,
+                "file_path": "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-5000047.onnx",
+                "reward": 4.116492085992114,
+                "creation_time": 1733120192.7322006,
                 "auxillary_file_paths": [
-                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-2500109.pt"
+                    "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-5000047.pt"
                 ]
             }
         ],
-        "elo": 1380.991608099278,
+        "elo": 915.4075290976346,
         "final_checkpoint": {
-            "steps": 2500109,
+            "steps": 5000047,
             "file_path": "results\\RL+Curiosity\\BehaviorTest.onnx",
-            "reward": 4.776250010511528,
-            "creation_time": 1732989854.0446095,
+            "reward": 4.116492085992114,
+            "creation_time": 1733120192.7322006,
             "auxillary_file_paths": [
-                "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-2500109.pt"
+                "results\\RL+Curiosity\\BehaviorTest\\BehaviorTest-5000047.pt"
             ]
         }
     },

@@ -24,26 +24,19 @@ public class AgentScript : Agent
         int lesson = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0);
         int maxAgentAmmo = 0;
 
-        switch(behaviorType) {
-            case BehaviorType.InferenceOnly:
-                maxAgentAmmo = 15;
-            break;
 
-            case BehaviorType.HeuristicOnly:
+        if(behaviorType == BehaviorType.InferenceOnly || behaviorType == BehaviorType.HeuristicOnly || gameEnvironmentController.curriculumLearningDisabled) {
+            maxAgentAmmo = 15;
+        } else {
+            if(lesson == 0) {
+                maxAgentAmmo = 3;
+            } else if(lesson == 1) {
+                maxAgentAmmo = 6;
+            } else if(lesson == 2) {
+                maxAgentAmmo = 10;
+            } else if(lesson == 3) {
                 maxAgentAmmo = 15;
-            break;
-
-            case BehaviorType.Default:
-                if(lesson == 0) {
-                    maxAgentAmmo = 3;
-                } else if(lesson == 1) {
-                    maxAgentAmmo = 6;
-                } else if(lesson == 2) {
-                    maxAgentAmmo = 10;
-                } else if(lesson == 3) {
-                    maxAgentAmmo = 15;
-                }
-            break;
+            }
         }
         
 
@@ -95,25 +88,14 @@ public class AgentScript : Agent
         healthSlider.value = 1;
 
 
-        switch(behaviorType) {
-            case BehaviorType.InferenceOnly:
-                gameEnvironmentController.LoadEnvironment(
-                    3
-                );
-            break;
+        if(behaviorType == BehaviorType.InferenceOnly || behaviorType == BehaviorType.HeuristicOnly || gameEnvironmentController.curriculumLearningDisabled) {
+            gameEnvironmentController.LoadEnvironment(3);
 
-            case BehaviorType.HeuristicOnly:
-                gameEnvironmentController.LoadEnvironment(
-                    3
-                );
-            break;
-
-            case BehaviorType.Default:
-                // carica l'ambiente in base allo stato del curriculum learning
-                gameEnvironmentController.LoadEnvironment(
-                    (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0)
-                );
-            break;
+        } else {
+            // carica l'ambiente in base allo stato del curriculum learning
+            gameEnvironmentController.LoadEnvironment(
+                (int)Academy.Instance.EnvironmentParameters.GetWithDefault("my_environment_parameter", 0)
+            );
         }
 
         //Posizione iniziale dell'agente(casuale)

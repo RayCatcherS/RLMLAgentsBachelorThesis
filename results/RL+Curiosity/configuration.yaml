@@ -51,7 +51,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     even_checkpoints: false
-    max_steps: 2500000
+    max_steps: 5000000
     time_horizon: 64
     summary_freq: 60000
     threaded: false
@@ -89,7 +89,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 4399
+          seed: 9938
           value: 0
       name: lesson0
       completion_criteria:
@@ -102,7 +102,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 4400
+          seed: 9939
           value: 1
       name: lesson1
       completion_criteria:
@@ -110,12 +110,12 @@ environment_parameters:
         measure: progress
         min_lesson_length: 0
         signal_smoothing: true
-        threshold: 0.3
+        threshold: 0.35
         require_reset: false
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 4401
+          seed: 9940
           value: 2
       name: lesson2
       completion_criteria:
@@ -128,7 +128,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 4402
+          seed: 9941
           value: 3
       name: lesson3
       completion_criteria:
@@ -142,8 +142,8 @@ checkpoint_settings:
   run_id: RL+Curiosity
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results

@@ -22,7 +22,7 @@ behaviors:
       vis_encode_type: simple
 
     # Trainer configurations common to all trainers
-    max_steps: 4000000  # Step massimi per l'addestramento
+    max_steps: 5000000  # Step massimi per l'addestramento
     keep_checkpoints: 5
     time_horizon: 64
     summary_freq: 60000
@@ -45,8 +45,7 @@ behaviors:
         strength: 0.02
         encoding_size: 128
         learning_rate: 0.0003
-
-
+      
 
 # indice valori apprendimento[index environment, qta colpi]
 environment_parameters:
