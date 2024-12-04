@@ -25,7 +25,7 @@ behaviors:
       deterministic: false
     reward_signals:
       extrinsic:
-        gamma: 0.6
+        gamma: 0.99
         strength: 1.0
         network_settings:
           normalize: false
@@ -50,7 +50,7 @@ behaviors:
         encoding_size: 128
       gail:
         gamma: 0.99
-        strength: 0.1
+        strength: 0.3
         network_settings:
           normalize: false
           hidden_units: 128
@@ -105,7 +105,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2393
+          seed: 2027
           value: 0
       name: lesson0
       completion_criteria:
@@ -118,7 +118,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2394
+          seed: 2028
           value: 1
       name: lesson1
       completion_criteria:
@@ -131,7 +131,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2395
+          seed: 2029
           value: 2
       name: lesson2
       completion_criteria:
@@ -144,7 +144,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 2396
+          seed: 2030
           value: 3
       name: lesson3
       completion_criteria:
@@ -155,7 +155,7 @@ environment_parameters:
         threshold: 0.99
         require_reset: false
 checkpoint_settings:
-  run_id: RL+Curiosity+GAIL
+  run_id: RL+Curiosity+GAIL(GAIL_MORE)
   initialize_from: null
   load_model: false
   resume: false

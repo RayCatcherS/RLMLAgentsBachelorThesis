@@ -7,6 +7,7 @@ public class EnvironmentController : MonoBehaviour {
 
     [Header("Environment override")]
     public bool curriculumLearningDisabled = false;
+    public bool wallMatchFailDisabled = false;
 
     [Header("Environments")]
     [SerializeField] List<GameObject> environments = new List<GameObject>();

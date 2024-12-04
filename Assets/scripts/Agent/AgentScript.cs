@@ -330,10 +330,14 @@ public class AgentScript : Agent
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag == "wall") {
-            gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
+
+            if(!gameEnvironmentController.wallMatchFailDisabled) {
+                gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
             gameObject.GetComponent<BehaviorParameters>().TeamId,
             -10f
-            );
+                );
+            }
+            
             //gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
             //    gameObject.GetComponent<BehaviorParameters>().TeamId
             //);

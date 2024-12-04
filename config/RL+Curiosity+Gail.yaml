@@ -36,7 +36,7 @@ behaviors:
     reward_signals:
       # environment reward (default)
       extrinsic:
-        gamma: 0.6
+        gamma: 0.99
         strength: 1.0
       
       # curiosity module
@@ -47,7 +47,7 @@ behaviors:
         learning_rate: 0.0003
       gail:
         gamma: 0.99
-        strength: 0.1
+        strength: 0.3
         learning_rate: 0.0003
         use_actions: true
         demo_path: Assets/Demos/Demos1(player1)/recs.demo

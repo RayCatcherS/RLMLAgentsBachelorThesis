@@ -47,13 +47,13 @@ behaviors:
         learning_rate: 0.0003
       gail:
         gamma: 0.99
-        strength: 0.1
+        strength: 0.3
         learning_rate: 0.0003
         use_actions: true
         demo_path: Assets/Demos/Demos1(player1)/recs.demo
     behavioral_cloning:
       demo_path: Assets/Demos/Demos1(player1)/recs.demo
-      strength: 0.5
+      strength: 0.025
       samples_per_update: 0
 
 
