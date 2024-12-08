@@ -32,7 +32,7 @@ public class CannonBall : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        //Debug.Log($"Proiettile colpito: {other.gameObject.name}");
+
 
         // Se il proiettile colpisce un agente
         if(other.CompareTag("agent")) {

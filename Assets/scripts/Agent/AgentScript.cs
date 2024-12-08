@@ -331,23 +331,20 @@ public class AgentScript : Agent
     private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag == "wall") {
 
+            // penalità per la collisione con un muro
             if(!gameEnvironmentController.wallMatchFailDisabled) {
                 gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
             gameObject.GetComponent<BehaviorParameters>().TeamId,
             -10f
                 );
             }
-            
-            //gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
-            //    gameObject.GetComponent<BehaviorParameters>().TeamId
-            //);
 
         } else if(collision.gameObject.tag == "agent") {
+            // penalità per la collisione con un altro agente
             gameEnvironmentController.EndEnvironmentEpisodeWithOneLose(
                 gameObject.GetComponent<BehaviorParameters>().TeamId,
                 -10f
                 );
-            //AddReward(-1f); // penalità per la collisione con un altro agente
         }
     }
 
