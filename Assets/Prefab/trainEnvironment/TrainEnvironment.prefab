@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curriculumLearningDisabled: 0
+  wallMatchFailDisabled: 0
   environments:
   - {fileID: 7293759724479523995}
   - {fileID: 2268282888370288186}
@@ -2353,10 +2354,10 @@ PrefabInstance:
     - target: {fileID: 3123082174282949019, guid: 04b0094166d7960438b84fa4ecc49fa4, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: d2e75af75e4af1542bb747ebb0a47cf7, type: 3}
     - target: {fileID: 3123082174282949019, guid: 04b0094166d7960438b84fa4ecc49fa4, type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5406464423386017930, guid: 04b0094166d7960438b84fa4ecc49fa4, type: 3}
       propertyPath: m_RootOrder

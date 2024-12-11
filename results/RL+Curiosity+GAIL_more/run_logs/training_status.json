@@ -1,0 +1,69 @@
+{
+    "my_environment_parameter": {
+        "lesson_num": 3
+    },
+    "BehaviorTest": {
+        "checkpoints": [
+            {
+                "steps": 6999960,
+                "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-6999960.onnx",
+                "reward": 2.418364116941978,
+                "creation_time": 1733703780.469244,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-6999960.pt"
+                ]
+            },
+            {
+                "steps": 7499980,
+                "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7499980.onnx",
+                "reward": 3.1033970263818573,
+                "creation_time": 1733704870.8675246,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7499980.pt"
+                ]
+            },
+            {
+                "steps": 7594678,
+                "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7594678.onnx",
+                "reward": 3.2067603783361847,
+                "creation_time": 1733705111.9069037,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7594678.pt"
+                ]
+            },
+            {
+                "steps": 7999963,
+                "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7999963.onnx",
+                "reward": 3.3198317495661533,
+                "creation_time": 1733706052.8225045,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-7999963.pt"
+                ]
+            },
+            {
+                "steps": 8000027,
+                "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-8000027.onnx",
+                "reward": 3.3198317495661533,
+                "creation_time": 1733706052.9373708,
+                "auxillary_file_paths": [
+                    "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-8000027.pt"
+                ]
+            }
+        ],
+        "elo": 868.585827730054,
+        "final_checkpoint": {
+            "steps": 8000027,
+            "file_path": "results\\RL+Curiosity+GAIL_more\\BehaviorTest.onnx",
+            "reward": 3.3198317495661533,
+            "creation_time": 1733706052.9373708,
+            "auxillary_file_paths": [
+                "results\\RL+Curiosity+GAIL_more\\BehaviorTest\\BehaviorTest-8000027.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu118"
+    }
+}

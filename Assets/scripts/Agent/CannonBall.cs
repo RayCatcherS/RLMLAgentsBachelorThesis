@@ -1,3 +1,4 @@
+using Unity.Barracuda;
 using Unity.MLAgents.Policies;
 using UnityEngine;
 
@@ -48,7 +49,14 @@ public class CannonBall : MonoBehaviour {
                 // Applica una ricompensa all'agente che ha sparato il proiettile
                 //agentScript.AddReward(10);
 
-                Debug.Log("colpito");
+                NNModel model = agentScript.GetComponent<BehaviorParameters>().Model;
+
+                if(model != null) {
+                    Debug.Log("win for: " + model.name.ToString());
+                } else {
+                    Debug.Log("win for training agent");
+                }
+                
                 // Disattiva il proiettile
                 gameObject.SetActive(false);
 
