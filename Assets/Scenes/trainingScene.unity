@@ -9234,6 +9234,10 @@ PrefabInstance:
       propertyPath: DemonstrationDirectory
       value: Demos1
       objectReference: {fileID: 0}
+    - target: {fileID: 954611959284764998, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 6741f97fd25289d4eaf551edc71dab3d, type: 3}
     - target: {fileID: 1267673356224450813, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9305,7 +9309,7 @@ PrefabInstance:
     - target: {fileID: 5804999616992132958, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: d2e75af75e4af1542bb747ebb0a47cf7, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 6741f97fd25289d4eaf551edc71dab3d, type: 3}
     - target: {fileID: 5804999616992132958, guid: 8283f5213fd084c44938bc51bd393d19, type: 3}
       propertyPath: m_BehaviorType
       value: 2
